@@ -1,5 +1,11 @@
 import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
+import { Config as ZiggyConfig } from 'ziggy-js';
+
+export interface PageProps {
+    auth: Auth;
+    ziggy: ZiggyConfig;
+}
 
 export interface Auth {
     user: User;

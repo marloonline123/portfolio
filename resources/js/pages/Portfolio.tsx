@@ -1,4 +1,4 @@
-import Contact from '@/components/Contact';
+import About from '@/components/About';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
@@ -34,8 +34,8 @@ export default function Portfolio() {
 
                 <main className="flex-grow">
                     <Hero />
+                    <About />
                     <Projects />
-                    <Contact />
                 </main>
 
                 <Footer />

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileCode, Github, Linkedin } from 'lucide-react';
 import { LanguageContext } from '../context/LanguageContext';
+import { Link } from '@inertiajs/react';
 
 const Hero: React.FC = () => {
   const { t, language } = useContext(LanguageContext);
@@ -78,13 +79,13 @@ const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <a href="#projects" className="btn btn-primary">
+            <Link href="#projects" className="btn btn-primary">
               {t('hero.view_work')}
               <ArrowRight size={18} className={language === 'ar' ? 'rotate-180' : ''} />
-            </a>
-            <a href="#contact" className="btn btn-outline">
+            </Link>
+            <Link href="/contact" className="btn btn-outline">
               {t('hero.contact_me')}
-            </a>
+            </Link>
           </div>
           
           <div className="mt-8 flex gap-4">

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from '@inertiajs/react';
 import { ThemeContext } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import { Menu, X, Moon, Sun, Code, Languages } from 'lucide-react';
@@ -43,17 +44,25 @@ const Navbar: React.FC = () => {
       scrolled ? 'bg-white/90 dark:bg-dark-bg/90 backdrop-blur-sm shadow-sm' : 'bg-transparent'
     }`}>
       <nav className="container-custom flex justify-between items-center py-4">
-        <a href="#" className="flex items-center gap-2 text-primary-600 dark:text-primary-400">
+        <Link href="/" className="flex items-center gap-2 text-primary-600 dark:text-primary-400">
           <Code size={28} strokeWidth={2} />
           <span className="font-bold text-xl">Abotalib</span>
-        </a>
+        </Link>
 
         {/* Desktop menu */}
         <ul className="hidden md:flex space-x-1">
-          <NavLink href="#" title={t('nav.home')} />
+          <li>
+            <Link href="/" className="nav-link text-base py-2 px-4">
+              {t('nav.home')}
+            </Link>
+          </li>
           <NavLink href="#about" title={t('nav.about')} />
           <NavLink href="#projects" title={t('nav.projects')} />
-          <NavLink href="#contact" title={t('nav.contact')} />
+          <li>
+            <Link href="/contact" className="nav-link text-base py-2 px-4">
+              {t('nav.contact')}
+            </Link>
+          </li>
         </ul>
 
         <div className="hidden md:flex items-center gap-4">
@@ -75,12 +84,12 @@ const Navbar: React.FC = () => {
               <Moon size={20} className="text-gray-700" />
             )}
           </button>
-          <a 
-            href="#contact" 
+          <Link
+            href="/contact"
             className="btn btn-primary"
           >
             {t('nav.lets_talk')}
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu toggle */}
@@ -126,11 +135,11 @@ const Navbar: React.FC = () => {
             <NavLink href="#" title={t('nav.home')} onClick={closeMenu} />
             <NavLink href="#about" title={t('nav.about')} onClick={closeMenu} />
             <NavLink href="#projects" title={t('nav.projects')} onClick={closeMenu} />
-            <NavLink href="#contact" title={t('nav.contact')} onClick={closeMenu} />
+            <NavLink href="/contact" title={t('nav.contact')} onClick={closeMenu} />
             <li className="px-4 pt-4 mt-2 border-t border-gray-100 dark:border-gray-800">
-              <a href="#contact" className="btn btn-primary w-full text-center" onClick={closeMenu}>
+              <Link href="/contact" className="btn btn-primary w-full text-center" onClick={closeMenu}>
                 {t('nav.lets_talk')}
-              </a>
+              </Link>
             </li>
           </ul>
         </motion.div>

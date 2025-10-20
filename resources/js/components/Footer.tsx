@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@inertiajs/react';
 import { Code, Heart, ArrowUp } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -13,10 +14,10 @@ const Footer: React.FC = () => {
     <footer className="bg-white dark:bg-dark-card py-8 border-t border-gray-200 dark:border-gray-800">
       <div className="container-custom">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-2 mb-4 md:mb-0">
+          <Link href="/" className="flex items-center gap-2 mb-4 md:mb-0">
             <Code size={24} className="text-primary-600 dark:text-primary-400" />
             <span className="font-bold text-xl">Abotalib Adam</span>
-          </div>
+          </Link>
           
           <div className="text-center md:text-left text-gray-500 dark:text-gray-400 text-sm">
             © {new Date().getFullYear()} Abotalib Adam. All rights reserved.
