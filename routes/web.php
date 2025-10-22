@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\SkillController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,10 +16,14 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('dashboard/dashboard');
     })->name('dashboard');
+
+    Route::name('dashboard.')->group(function () {
+        Route::apiResource('skills', SkillController::class)->except('show');
+    });
 });
 
 require __DIR__.'/settings.php';
