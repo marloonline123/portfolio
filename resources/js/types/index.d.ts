@@ -5,6 +5,12 @@ import { Config as ZiggyConfig } from 'ziggy-js';
 export interface PageProps {
     auth: Auth;
     ziggy: ZiggyConfig;
+    locale: string;
+    flash?: {
+        success?: string;
+        error?: string;
+        info?: string;
+    };
 }
 
 export interface Auth {

@@ -1,4 +1,6 @@
 export interface Skill {
     id: number;
-    name: string;
+    name: {
+        [locale: string]: string;
+    };
 }

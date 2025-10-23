@@ -20,6 +20,7 @@ import DeleteSkillModal from '@/components/skills/delete-skill-modal';
 import { Skill } from '@/types/skill';
 import { PaginatedData } from '@/types/global';
 import AppLayout from '@/layouts/app-layout';
+import { useTrans } from '@/hooks/use-trans';
 
 interface Props {
     skills: PaginatedData<Skill>;
@@ -32,6 +33,7 @@ export default function Index({ skills, search = '' }: Props) {
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const trans = useTrans();
 
     const handleEdit = (skill: Skill) => {
         setEditingSkill(skill);
@@ -58,6 +60,7 @@ export default function Index({ skills, search = '' }: Props) {
 
                 <div className="flex items-center gap-4">
                     <SearchBar
+                        key={search}
                         placeholder="Search skills..."
                         initialValue={search}
                         routeName="dashboard.skills.index"
@@ -85,7 +88,7 @@ export default function Index({ skills, search = '' }: Props) {
                                     skills.data.map((skill, index) => (
                                         <TableRow key={skill.id}>
                                             <TableCell>{1 + index}</TableCell>
-                                            <TableCell className="font-medium">{skill.name}</TableCell>
+                                            <TableCell className="font-medium">{trans(skill.name)}</TableCell>
                                             <TableCell>
                                                 <div className="flex items-center gap-1 sm:gap-2">
                                                     <Button

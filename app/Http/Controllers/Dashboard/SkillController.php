@@ -27,7 +27,7 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name' => 'required|string|max:255|unique:skills,name',
+            'name.*' => 'required|string|max:255',
         ]);
 
         Skill::create($validator);
@@ -42,7 +42,7 @@ class SkillController extends Controller
     public function update(Request $request, Skill $skill)
     {
         $validator = $request->validate([
-            'name' => 'required|string|max:255|unique:skills,name,' . $skill->id,
+            'name.*' => 'required|string|max:255',
         ]);
 
         $skill->update($validator);
