@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\SkillController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
 
     Route::name('dashboard.')->group(function () {
         Route::apiResource('skills', SkillController::class)->except('show');
+        Route::apiResource('categories', CategoryController::class)->except('show');
     });
 });
 
