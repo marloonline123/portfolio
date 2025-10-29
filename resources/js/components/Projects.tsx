@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
-import { projects, ProjectCategory } from '../data/projects';
+import { projects } from '../data/projects';
+import { useTrans } from '@/hooks/use-trans';
+import { Category } from '@/types/category';
 
 const Projects: React.FC = () => {
-  const [category, setCategory] = useState<ProjectCategory | 'all'>('all');
+  const trans = useTrans();
+  const [category, setCategory] = useState<Category | 'all'>('all');
   
   const filteredProjects = category === 'all' 
     ? projects 
@@ -31,7 +34,7 @@ const Projects: React.FC = () => {
             {['all', 'web', 'mobile', 'system'].map((cat) => (
               <button
                 key={cat}
-                onClick={() => setCategory(cat as ProjectCategory | 'all')}
+                onClick={() => setCategory(cat as Category | 'all')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                   category === cat
                     ? 'bg-white dark:bg-dark-card shadow-sm text-primary-600 dark:text-primary-400'
@@ -58,15 +61,15 @@ const Projects: React.FC = () => {
               {/* Project image */}
               <div className="aspect-video w-full overflow-hidden relative">
                 <img 
-                  src={project.image} 
-                  alt={project.title} 
+                  src={project.imageUrl} 
+                  alt={trans(project.title)} 
                   className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4 flex space-x-3">
-                    {project.demoLink && (
+                    {project.liveUrl && (
                       <a 
-                        href={project.demoLink} 
+                        href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-white bg-primary-600 hover:bg-primary-700 p-2 rounded-full"
@@ -74,9 +77,9 @@ const Projects: React.FC = () => {
                         <ExternalLink size={18} />
                       </a>
                     )}
-                    {project.githubLink && (
+                    {project.githubUrl && (
                       <a 
-                        href={project.githubLink} 
+                        href={project.githubUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-white bg-gray-800 hover:bg-gray-900 p-2 rounded-full"
@@ -91,13 +94,13 @@ const Projects: React.FC = () => {
               {/* Project details */}
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-bold text-xl">{project.title}</h3>
+                  <h3 className="font-bold text-xl">{trans(project.title)}</h3>
                   <span className="text-xs px-2 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full">
-                    {project.category}
+                    {trans(project.category.name)}
                   </span>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {project.description}
+                  {trans(project.description)}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (

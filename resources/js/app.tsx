@@ -1,4 +1,5 @@
 import '../css/app.css';
+import './i18n';
 
 import { LanguageProvider } from '@/context/LanguageContext';
 import { ThemeProvider } from '@/context/ThemeContext';
