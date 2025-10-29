@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
-import { projects } from '../data/projects';
+import { projects } from '../../../data/projects';
 import { useTrans } from '@/hooks/use-trans';
 import { Category } from '@/types/category';
 
@@ -61,7 +61,7 @@ const Projects: React.FC = () => {
               {/* Project image */}
               <div className="aspect-video w-full overflow-hidden relative">
                 <img 
-                  src={project.imageUrl} 
+                  src={project.imagePath} 
                   alt={trans(project.title)} 
                   className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-110"
                 />

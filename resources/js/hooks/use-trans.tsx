@@ -8,8 +8,9 @@ import { usePage } from '@inertiajs/react';
 export function useTrans() {
     const { locale } = usePage().props as PageProps;
 
-    const trans = (obj: Record<string, string>, fallback = 'en') => {
+    const trans = (obj: Record<string, string> | string | null, fallback = 'en') => {
         if (!obj) return '';
+        if (typeof obj === 'string') return obj;
         return obj[locale] || obj[fallback] || '';
     };
 

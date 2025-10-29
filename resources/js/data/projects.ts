@@ -12,9 +12,13 @@ export const projects: Project[] = [
       is_active: true
     },
     description: { en: "Marketing automation platform for feasibility studies, marketing plans, and research.", ar: "منصة أتمتة التسويق لدراسات الجدوى والخطط التسويقية والبحث." },
-    imageUrl: "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imagePath: "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     technologies: ['Laravel', 'Vue.js', 'Tailwind CSS', 'MySQL'],
-    liveUrl: "https://example.com/bouh-marketing"
+    liveUrl: "https://example.com/bouh-marketing",
+    githubUrl: "https://github.com/bouh-marketing",
+    isActive: true,
+    createdAt: "2022-11-10T09:00:00Z",
+    updatedAt: "2023-05-05T12:00:00Z"
   },
   {
     id: 2,
@@ -27,9 +31,12 @@ export const projects: Project[] = [
       is_active: true
     },
     description: { en: "Complete point of sale system with invoicing, stock management via CSV, and WhatsApp integration.", ar: "نظام نقاط بيع متكامل مع الفواتير وإدارة المخزون عبر CSV وتكامل واتساب." },
-    imageUrl: "https://images.pexels.com/photos/8867429/pexels-photo-8867429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imagePath: "https://images.pexels.com/photos/8867429/pexels-photo-8867429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     technologies: ['Laravel', 'Inertia.js', 'React', 'MySQL'],
-    liveUrl: "https://example.com/nadara-pos"
+    liveUrl: "https://example.com/nadara-pos",
+    isActive: true,
+    createdAt: "2022-11-10T09:00:00Z",
+    updatedAt: "2023-05-05T12:00:00Z"
   },
   {
     id: 3,
@@ -42,9 +49,12 @@ export const projects: Project[] = [
       is_active: true
     },
     description: { en: "Social platform with post creation, GPT content generation, and real-time notifications.", ar: "منصة اجتماعية مع إنشاء المنشورات وتوليد المحتوى بواسطة GPT وإشعارات في الوقت الفعلي." },
-    imageUrl: "https://images.pexels.com/photos/5967861/pexels-photo-5967861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imagePath: "https://images.pexels.com/photos/5967861/pexels-photo-5967861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     technologies: ['Laravel', 'Vue.js', 'Pusher', 'Tailwind CSS'],
-    liveUrl: "https://example.com/social-app"
+    liveUrl: "https://example.com/social-app",
+    isActive: true,
+    createdAt: "2022-11-10T09:00:00Z",
+    updatedAt: "2023-05-05T12:00:00Z"
   },
   {
     id: 4,
@@ -57,9 +67,12 @@ export const projects: Project[] = [
       is_active: true
     },
     description: { en: "Admin dashboard for managing products, orders, customers, and analytics.", ar: "لوحة تحكم إدارية لإدارة المنتجات والطلبات والعملاء والتحليلات." },
-    imageUrl: "https://images.pexels.com/photos/6804604/pexels-photo-6804604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imagePath: "https://images.pexels.com/photos/6804604/pexels-photo-6804604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'MySQL'],
-    liveUrl: "https://example.com/ecommerce-dashboard"
+    liveUrl: "https://example.com/ecommerce-dashboard",
+    isActive: true,
+    createdAt: "2022-11-10T09:00:00Z",
+    updatedAt: "2023-05-05T12:00:00Z"
   },
   {
     id: 5,
@@ -72,10 +85,13 @@ export const projects: Project[] = [
       is_active: true
     },
     description: { en: "Mobile application for planning weekly meals with grocery list integration.", ar: "تطبيق جوال لتخطيط الوجبات الأسبوعية مع تكامل قائمة البقالة." },
-    imageUrl: "https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imagePath: "https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     technologies: ['React Native', 'Firebase', 'Redux'],
     liveUrl: "https://example.com/meal-planner",
-    githubUrl: "https://github.com/example/meal-planner"
+    githubUrl: "https://github.com/example/meal-planner",
+    isActive: true,
+    createdAt: "2022-11-10T09:00:00Z",
+    updatedAt: "2023-05-05T12:00:00Z"
   },
   {
     id: 6,
@@ -83,13 +99,16 @@ export const projects: Project[] = [
     slug: { en: "task-management-platform", ar: "منصة-إدارة-المهام" },
     category: {
       id: 1,
-      name: { en: "Web Development", ar: "تطوير الويب" },
+      name: { en: "Dart", ar: "تطوير الويب" },
       slug: { en: "web-development", ar: "تطوير-الويب" },
       is_active: true
     },
     description: { en: "Project management system with task assignments, due dates, and progress tracking.", ar: "نظام إدارة المشاريع مع تعيين المهام وتواريخ الاستحقاق وتتبع التقدم." },
-    imageUrl: "https://images.pexels.com/photos/5717479/pexels-photo-5717479.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imagePath: "https://images.pexels.com/photos/5717479/pexels-photo-5717479.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     technologies: ['Laravel', 'React', 'MySQL', 'Tailwind CSS'],
-    liveUrl: "https://example.com/task-manager"
+    liveUrl: "https://example.com/task-manager",
+    isActive: true,
+    createdAt: "2022-11-10T09:00:00Z",
+    updatedAt: "2023-05-05T12:00:00Z"
   }
 ];

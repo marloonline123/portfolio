@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SkillController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,11 +23,11 @@ Route::get('/projects/{slug}', function ($slug) {
     $project = [
         'title' => [
             'en' => 'Sample Project',
-            'es' => 'Proyecto de Ejemplo',
+            'ar' => 'Proyecto de Ejemplo',
         ],
         'description' => [
             'en' => 'This is a sample project description in English. lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            'es' => 'Esta es una descripción de proyecto de ejemplo en español.',
+            'ar' => 'Esta es una descripción de proyecto de ejemplo en español.',
         ],
         'imageUrl' => 'https://d2j6dbq0eux0bg.cloudfront.net/images/66610504/2636936256.jpg',
         'technologies' => ['Laravel', 'Inertia.js', 'React'],
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::name('dashboard.')->group(function () {
         Route::apiResource('skills', SkillController::class)->except('show');
         Route::apiResource('categories', CategoryController::class)->except('show');
+        Route::resource('projects', ProjectController::class);
     });
 });
 

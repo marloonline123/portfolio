@@ -14,9 +14,9 @@ import {
 
 import Pagination from '@/components/shared/pagination';
 import SearchBar from '@/components/shared/search-bar';
-import CreateSkillModal from '@/components/skills/create-skill-modal';
-import EditSkillModal from '@/components/skills/edit-skill-modal';
-import DeleteSkillModal from '@/components/skills/delete-skill-modal';
+import CreateSkillModal from '@/components/dashboard/skills/create-skill-modal';
+import EditSkillModal from '@/components/dashboard/skills/edit-skill-modal';
+import DeleteSkillModal from '@/components/dashboard/skills/delete-skill-modal';
 import { Skill } from '@/types/skill';
 import { PaginatedData } from '@/types/global';
 import AppLayout from '@/layouts/app-layout';

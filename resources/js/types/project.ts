@@ -12,8 +12,11 @@ export type Project = {
         [locale: string]: string;
     };
     category: Category;
-    imageUrl: string;
+    imagePath: string;
     technologies: string[];
     liveUrl?: string;
     githubUrl?: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
 };

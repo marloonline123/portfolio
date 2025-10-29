@@ -250,3 +250,7 @@
         @apply text-primary-600 dark:text-primary-400 font-semibold;
     }
 }
+
+button {
+    cursor: pointer;
+}
