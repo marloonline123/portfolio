@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AboutSectionController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\FieldsSectionController;
 use App\Http\Controllers\Dashboard\HeroSectionController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SkillController;
@@ -69,6 +70,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         // About Section Routes
         Route::get('about-sections', [AboutSectionController::class, 'edit'])->name('about-sections.edit');
         Route::put('about-sections/{aboutSection}', [AboutSectionController::class, 'update'])->name('about-sections.update');
+
+        // Fields Section Routes
+        Route::apiResource('fields-sections', FieldsSectionController::class)->except('show');
     });
 });
 

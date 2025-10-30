@@ -3,9 +3,6 @@ import { Head, useForm } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft } from 'lucide-react';
-import { Link } from '@inertiajs/react';
 import { AboutSection } from '@/types/about-section';
 import LocalDropdown from '@/components/shared/local-dropdown';
 import InputError from '@/components/input-error';
@@ -35,30 +32,24 @@ export default function Edit({ aboutSection }: Props) {
         <AppLayout>
             <Head title="Edit About Section" />
 
-            <div className="flex items-center gap-4 mb-6">
-                <Link href={route('dashboard')} className="btn btn-outline">
-                    <ArrowLeft size={16} />
-                    Back to Dashboard
-                </Link>
-                <h1 className="text-2xl font-bold">Edit About Section</h1>
-            </div>
-
-            <form onSubmit={handleSubmit} className="relative">
-                <div className="absolute -top-7 right-0 z-10">
-                    <LocalDropdown
-                        value={selectedLanguage}
-                        onChange={setSelectedLanguage}
-                        error={errors.title?.[selectedLanguage as keyof typeof errors.title] as string}
-                        htmlFor="language-select"
-                    />
+            <div className='p-7'>
+                <div className="flex items-center gap-4 mb-6">
+                    <h1 className="text-2xl font-bold">Edit About Section</h1>
                 </div>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>About Section Content</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
+
+                <form onSubmit={handleSubmit} className="relative">
+                    <div className="absolute -top-2 right-0 z-10">
+                        <LocalDropdown
+                            value={selectedLanguage}
+                            onChange={setSelectedLanguage}
+                            error={errors.title?.[selectedLanguage as keyof typeof errors.title] as string}
+                            htmlFor="language-select"
+                        />
+                    </div>
+
+                    <div className="space-y-6 pt-8">
                         {/* Title */}
-                        <div className="grid grid-cols-4 items-center gap-4">
+                        <div className="space-y-2">
                             <Label htmlFor="title" className="text-right">
                                 Title
                             </Label>
@@ -75,7 +66,7 @@ export default function Edit({ aboutSection }: Props) {
                         </div>
 
                         {/* Subtitle */}
-                        <div className="grid grid-cols-4 items-center gap-4">
+                        <div className="space-y-2">
                             <Label htmlFor="subtitle" className="text-right">
                                 Subtitle
                             </Label>
@@ -93,7 +84,7 @@ export default function Edit({ aboutSection }: Props) {
                         </div>
 
                         {/* Journey Description */}
-                        <div className="grid grid-cols-4 items-center gap-4">
+                        <div className="space-y-2">
                             <Label htmlFor="journey_description" className="text-right">
                                 Journey Description
                             </Label>
@@ -111,7 +102,7 @@ export default function Edit({ aboutSection }: Props) {
                         </div>
 
                         {/* Specialization Description */}
-                        <div className="grid grid-cols-4 items-center gap-4">
+                        <div className="space-y-2">
                             <Label htmlFor="specialization_description" className="text-right">
                                 Specialization Description
                             </Label>
@@ -127,17 +118,17 @@ export default function Edit({ aboutSection }: Props) {
                                 <InputError message={errors['specialization_description.' + selectedLanguage as keyof typeof errors]} />
                             </div>
                         </div>
-                    </CardContent>
-                </Card>
+                    </div>
 
-                <div className="flex justify-end pt-4">
-                    <FormButton
-                        text="Update About Section"
-                        loadingText="Updating..."
-                        isLoading={processing}
-                    />
-                </div>
-            </form>
+                    <div className="flex justify-end pt-4">
+                        <FormButton
+                            text="Update About Section"
+                            loadingText="Updating..."
+                            isLoading={processing}
+                        />
+                    </div>
+                </form>
+            </div>
         </AppLayout>
     );
 }

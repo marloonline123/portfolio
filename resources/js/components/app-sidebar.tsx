@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -22,14 +22,26 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Hero Section',
-        href: route('dashboard.hero-sections.edit'),
-        icon: User,
-    },
-    {
-        title: 'About Section',
-        href: route('dashboard.about-sections.edit'),
-        icon: User,
+        title: 'Home Data',
+        href: '#',
+        icon: Home,
+        items: [
+            {
+                title: 'Hero Section',
+                href: route('dashboard.hero-sections.edit'),
+                icon: User,
+            },
+            {
+                title: 'About Section',
+                href: route('dashboard.about-sections.edit'),
+                icon: BookOpen,
+            },
+            {
+                title: 'Fields Section',
+                href: route('dashboard.fields-sections.index'),
+                icon: Zap,
+            },
+        ],
     },
     {
         title: 'Skills',

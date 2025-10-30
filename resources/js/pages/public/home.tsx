@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
 import Projects from '@/components/public/projects/Projects';
 import { type AboutSection } from '@/types/about-section';
+import { type FieldsSection } from '@/types/fields-section';
 import { type HeroSection } from '@/types/hero-section';
 import { type Skill } from '@/types/skill';
 import { Head } from '@inertiajs/react';
@@ -11,11 +12,12 @@ import { useEffect, useState } from 'react';
 
 interface HomeProps {
     aboutSection?: AboutSection;
+    fieldsSections?: FieldsSection[];
     heroSection?: HeroSection;
     skills: Skill[];
 }
 
-export default function Home({ heroSection, aboutSection, skills }: HomeProps) {
+export default function Home({ heroSection, aboutSection, fieldsSections, skills }: HomeProps) {
     const [scrollProgress, setScrollProgress] = useState(0);
 
     const handleScroll = () => {
@@ -43,7 +45,7 @@ export default function Home({ heroSection, aboutSection, skills }: HomeProps) {
 
                 <main className="flex-grow">
                     <Hero heroSection={heroSection} skills={skills} />
-                    <About aboutSection={aboutSection} />
+                    <About aboutSection={aboutSection} fieldsSections={fieldsSections} />
                     <Projects />
                 </main>
 
