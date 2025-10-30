@@ -135,6 +135,7 @@ export const portfolioData = {
       },
       items: [
         {
+          icon: 'Code2',
           title: {
             en: 'Frontend Development',
             ar: 'تطوير الواجهة الأمامية'
@@ -145,6 +146,7 @@ export const portfolioData = {
           }
         },
         {
+          icon: 'Database',
           title: {
             en: 'Backend Development',
             ar: 'تطوير الخادم الخلفي'
@@ -155,6 +157,7 @@ export const portfolioData = {
           }
         },
         {
+          icon: 'Layers',
           title: {
             en: 'Full-Stack Solutions',
             ar: 'حلول كاملة الوظائف'
@@ -165,6 +168,7 @@ export const portfolioData = {
           }
         },
         {
+          icon: 'Settings',
           title: {
             en: 'System Architecture',
             ar: 'هندسة النظام'
@@ -175,6 +179,7 @@ export const portfolioData = {
           }
         },
         {
+          icon: 'Palette',
           title: {
             en: 'UI/UX Implementation',
             ar: 'تنفيذ UI/UX'
@@ -185,6 +190,7 @@ export const portfolioData = {
           }
         },
         {
+          icon: 'Database',
           title: {
             en: 'Database Design',
             ar: 'تصميم قاعدة البيانات'

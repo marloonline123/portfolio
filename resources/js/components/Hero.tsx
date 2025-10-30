@@ -2,24 +2,19 @@ import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileCode, Github, Linkedin } from 'lucide-react';
 import { LanguageContext } from '../context/LanguageContext';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { portfolioData } from '../data/portfolio';
 import { useTrans } from '@/hooks/use-trans';
+import { type HeroSection } from '@/types/hero-section';
+import { type Skill } from '@/types/skill';
 
 interface HeroProps {
-  heroSection?: {
-    name: { [locale: string]: string };
-    role: { [locale: string]: string };
-    description: { [locale: string]: string };
-    yearsExperience: number;
-    projectsCount: number;
-    githubUrl?: string;
-    linkedinUrl?: string;
-  };
+  heroSection?: HeroSection;
+  skills: Skill[];
 }
 
-const Hero: React.FC<HeroProps> = ({ heroSection }) => {
-  const { language } = useContext(LanguageContext);
+const Hero: React.FC<HeroProps> = ({ heroSection, skills = [] }) => {
+  const language = usePage().props.locale;
   const trans = useTrans();
 
   const techStackAnimation = {
@@ -171,13 +166,13 @@ const Hero: React.FC<HeroProps> = ({ heroSection }) => {
                   className="flex flex-wrap justify-center gap-2 text-xs"
                   variants={techStackAnimation}
                 >
-                  {technologies.map((tech, index) => (
+                  {skills.map((skill, index) => (
                     <motion.span 
                       key={index}
                       variants={techItemAnimation}
                       className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-default"
                     >
-                      {tech}
+                      {trans(skill.name)}
                     </motion.span>
                   ))}
                 </motion.div>

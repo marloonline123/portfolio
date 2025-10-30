@@ -3,10 +3,19 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
 import Projects from '@/components/public/projects/Projects';
+import { type AboutSection } from '@/types/about-section';
+import { type HeroSection } from '@/types/hero-section';
+import { type Skill } from '@/types/skill';
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
-export default function Portfolio() {
+interface HomeProps {
+    aboutSection?: AboutSection;
+    heroSection?: HeroSection;
+    skills: Skill[];
+}
+
+export default function Home({ heroSection, aboutSection, skills }: HomeProps) {
     const [scrollProgress, setScrollProgress] = useState(0);
 
     const handleScroll = () => {
@@ -33,8 +42,8 @@ export default function Portfolio() {
                 <Navbar />
 
                 <main className="flex-grow">
-                    <Hero />
-                    <About />
+                    <Hero heroSection={heroSection} skills={skills} />
+                    <About aboutSection={aboutSection} />
                     <Projects />
                 </main>
 

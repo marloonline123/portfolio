@@ -1,6 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Layers, Settings, Database, Palette, ChevronRight } from 'lucide-react';
+import { useTrans } from '@/hooks/use-trans';
+import { portfolioData } from '../data/portfolio';
+import { AboutSection } from '@/types/about-section';
+
+const getIconComponent = (iconName: string) => {
+  switch (iconName) {
+    case 'Code2':
+      return Code2;
+    case 'Database':
+      return Database;
+    case 'Layers':
+      return Layers;
+    case 'Settings':
+      return Settings;
+    case 'Palette':
+      return Palette;
+    default:
+      return Code2;
+  }
+};
 
 interface SkillCardProps {
   icon: React.ReactNode;
@@ -21,7 +41,12 @@ const SkillCard: React.FC<SkillCardProps> = ({ icon, title, description }) => (
   </motion.div>
 );
 
-const About: React.FC = () => {
+interface AboutProps {
+  aboutSection?: AboutSection
+}
+
+const About: React.FC<AboutProps> = ({ aboutSection }: AboutProps) => {
+  const trans = useTrans();
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-gray-900/50">
       <div className="container-custom">
@@ -32,10 +57,9 @@ const About: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="section-title">About Me</h2>
+          <h2 className="section-title">{aboutSection?.title ? trans(aboutSection.title) : trans(portfolioData.about.title)}</h2>
           <p className="section-subtitle mx-auto">
-            I'm a passionate full-stack developer with 2 years of freelance experience creating 
-            modern, functional, and user-friendly applications.
+            {aboutSection?.subtitle ? trans(aboutSection.subtitle) : trans(portfolioData.about.subtitle)}
           </p>
         </motion.div>
 
@@ -48,15 +72,11 @@ const About: React.FC = () => {
           >
             <h3 className="text-2xl font-bold mb-4">My Journey</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Over the past 2 years, I've worked as a freelance developer building various applications 
-              ranging from marketing websites to complex inventory systems. My approach focuses on creating 
-              clean, efficient code that delivers exceptional user experiences.
+              {aboutSection?.journeyDescription ? trans(aboutSection.journeyDescription) : trans(portfolioData.about.journey)}
             </p>
 
             <p className="text-gray-600 dark:text-gray-300 mb-8">
-              I specialize in both frontend and backend development, with particular expertise in React, Vue, 
-              Laravel, and Next.js. I'm passionate about staying up-to-date with the latest technologies and 
-              best practices in the industry.
+              {aboutSection?.specializationDescription ? trans(aboutSection.specializationDescription) : trans(portfolioData.about.specialization)}
             </p>
 
             <a href="#projects" className="flex items-center text-primary-600 dark:text-primary-400 font-medium">
@@ -147,38 +167,19 @@ const About: React.FC = () => {
           </motion.div>
         </div>
 
-        <h3 className="text-2xl font-bold mb-6 text-center">What I Can Do</h3>
+        <h3 className="text-2xl font-bold mb-6 text-center">{trans(portfolioData.about.whatIDo.title)}</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <SkillCard 
-            icon={<Code2 size={24} className="text-primary-600 dark:text-primary-400" />}
-            title="Frontend Development"
-            description="Create responsive, intuitive user interfaces with modern frameworks."
-          />
-          <SkillCard 
-            icon={<Database size={24} className="text-primary-600 dark:text-primary-400" />}
-            title="Backend Development"
-            description="Build robust server-side applications and APIs with Laravel." 
-          />
-          <SkillCard 
-            icon={<Layers size={24} className="text-primary-600 dark:text-primary-400" />}
-            title="Full-Stack Solutions"
-            description="Develop end-to-end applications with seamless frontend and backend integration."
-          />
-          <SkillCard 
-            icon={<Settings size={24} className="text-primary-600 dark:text-primary-400" />}
-            title="System Architecture"
-            description="Design scalable, maintainable application architecture and data models."
-          />
-          <SkillCard 
-            icon={<Palette size={24} className="text-primary-600 dark:text-primary-400" />}
-            title="UI/UX Implementation"
-            description="Transform designs into functional, beautiful web interfaces."
-          />
-          <SkillCard 
-            icon={<Database size={24} className="text-primary-600 dark:text-primary-400" />}
-            title="Database Design"
-            description="Create efficient database schemas and optimize queries for performance."
-          />
+          {portfolioData.about.whatIDo.items.map((item, index) => {
+            const IconComponent = getIconComponent(item.icon);
+            return (
+              <SkillCard
+                key={index}
+                icon={<IconComponent size={24} className="text-primary-600 dark:text-primary-400" />}
+                title={trans(item.title)}
+                description={trans(item.description)}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
