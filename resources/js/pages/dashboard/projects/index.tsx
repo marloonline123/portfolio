@@ -18,7 +18,7 @@ import { Project } from '@/types/project';
 import { PaginatedData } from '@/types/global';
 import AppLayout from '@/layouts/app-layout';
 import { useTrans } from '@/hooks/use-trans';
-import DeleteProjectModal from '@/components/projects/delete-project-modal';
+import DeleteProjectModal from '@/components/dashboard/projects/delete-project-modal';
 
 interface Props {
     projects: PaginatedData<Project>;

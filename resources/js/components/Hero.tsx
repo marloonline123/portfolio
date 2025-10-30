@@ -3,9 +3,24 @@ import { motion } from 'framer-motion';
 import { ArrowRight, FileCode, Github, Linkedin } from 'lucide-react';
 import { LanguageContext } from '../context/LanguageContext';
 import { Link } from '@inertiajs/react';
+import { portfolioData } from '../data/portfolio';
+import { useTrans } from '@/hooks/use-trans';
 
-const Hero: React.FC = () => {
-  const { t, language } = useContext(LanguageContext);
+interface HeroProps {
+  heroSection?: {
+    name: { [locale: string]: string };
+    role: { [locale: string]: string };
+    description: { [locale: string]: string };
+    yearsExperience: number;
+    projectsCount: number;
+    githubUrl?: string;
+    linkedinUrl?: string;
+  };
+}
+
+const Hero: React.FC<HeroProps> = ({ heroSection }) => {
+  const { language } = useContext(LanguageContext);
+  const trans = useTrans();
 
   const techStackAnimation = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -58,33 +73,39 @@ const Hero: React.FC = () => {
         >
           <div className="flex items-center gap-2 mb-4 text-primary-600 dark:text-primary-400">
             <div className="h-px w-12 bg-primary-600 dark:bg-primary-400"></div>
-            <p className="text-sm font-medium uppercase tracking-wider">{t('hero.role')}</p>
+            <p className="text-sm font-medium uppercase tracking-wider">
+              {heroSection ? trans(heroSection.role) : trans(portfolioData.hero.role)}
+            </p>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             {language === 'ar' ? (
               <>
-                <span className="text-primary-600 dark:text-primary-400">أبو طالب آدم</span> مرحباً، أنا
+                <span className="text-primary-600 dark:text-primary-400">
+                  {heroSection ? trans(heroSection.name) : trans(portfolioData.hero.name)}
+                </span> { ' ' + trans(portfolioData.hero.greeting)}
               </>
             ) : (
               <>
-                Hi, I'm 
-                <span className="text-primary-600 dark:text-primary-400"> Abotalib Adam</span>
+                {trans(portfolioData.hero.greeting) + ' '}
+                <span className="text-primary-600 dark:text-primary-400">
+                  {heroSection ? trans(heroSection.name) : trans(portfolioData.hero.name)}
+                </span>
               </>
             )}
           </h1>
-          
+
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
-            {t('hero.description')}
+            {heroSection ? trans(heroSection.description) : trans(portfolioData.hero.description)}
           </p>
-          
+
           <div className="flex flex-wrap gap-4">
             <Link href="#projects" className="btn btn-primary">
-              {t('hero.view_work')}
+              {trans(portfolioData.hero.viewWork)}
               <ArrowRight size={18} className={language === 'ar' ? 'rotate-180' : ''} />
             </Link>
             <Link href="/contact" className="btn btn-outline">
-              {t('hero.contact_me')}
+              {trans(portfolioData.hero.contactMe)}
             </Link>
           </div>
           
@@ -166,24 +187,24 @@ const Hero: React.FC = () => {
                   variants={statsAnimation}
                 >
                   <div className="text-center">
-                    <motion.div 
+                    <motion.div
                       className="text-primary-600 dark:text-primary-400 font-bold text-2xl"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.6, type: "spring" }}
                     >
-                      2+
+                      {heroSection?.yearsExperience || 2}+
                     </motion.div>
                     <div className="text-gray-600 dark:text-gray-300">Years Experience</div>
                   </div>
                   <div className="text-center">
-                    <motion.div 
+                    <motion.div
                       className="text-primary-600 dark:text-primary-400 font-bold text-2xl"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.7, type: "spring" }}
                     >
-                      10+
+                      {heroSection?.projectsCount || 10}+
                     </motion.div>
                     <div className="text-gray-600 dark:text-gray-300">Projects</div>
                   </div>
@@ -202,10 +223,7 @@ const Hero: React.FC = () => {
       >
         <div className="border-t border-gray-200 dark:border-gray-800 pt-10">
           <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-            {language === 'ar' 
-              ? 'موثوق به من قبل عملاء العمل الحر من مختلف الصناعات'
-              : 'Trusted by freelance clients from various industries'
-            }
+            {trans(portfolioData.hero.trustedBy)}
           </p>
         </div>
       </motion.div>

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeftIcon } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
-import ProjectForm from '@/components/projects/project-form';
+import ProjectForm from '@/components/dashboard/projects/project-form';
 import { Category } from '@/types/category';
 import AppLayout from '@/layouts/app-layout';
 

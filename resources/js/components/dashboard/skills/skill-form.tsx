@@ -55,12 +55,12 @@ export default function SkillForm({ skill, action, method = 'post', onSuccess, s
                     <div className="col-span-3">
                         <Input
                             id="skill-name"
-                            value={data.name[selectedLanguage] || ''}
+                            value={data.name[selectedLanguage as keyof typeof data.name] || ''}
                             onChange={(e) => setData('name', { ...data.name, [selectedLanguage]: e.target.value })}
                             placeholder="Enter skill name"
                             disabled={processing}
                         />
-                        <InputError message={errors.name?.[selectedLanguage as keyof typeof errors.name] as string} />
+                        <InputError message={errors['name.' + selectedLanguage as keyof typeof errors]} />
                     </div>
                 </div>
             </div>

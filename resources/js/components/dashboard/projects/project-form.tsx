@@ -10,9 +10,8 @@ import LocalDropdown from '@/components/shared/local-dropdown';
 import { ImageUpload } from '@/components/shared/image-upload';
 import { Project } from '@/types/project';
 import { Category } from '@/types/category';
-import { Checkbox } from '@/components/ui/checkbox';
 import { useSlugGenerator } from '@/hooks/use-slug-generator';
-import { Switch } from '../ui/switch';
+import { Switch } from '../../ui/switch';
 
 interface ProjectFormProps {
     project?: Project | null;
@@ -109,7 +108,7 @@ export default function ProjectForm({
                                 placeholder="Enter project title"
                                 disabled={processing}
                             />
-                            <InputError message={errors.title?.[selectedLanguage as keyof typeof errors.title] as string} />
+                            <InputError message={errors['title.' + selectedLanguage as keyof typeof errors]} />
                         </div>
                     </div>
                     <div className="space-y-2">
@@ -124,7 +123,7 @@ export default function ProjectForm({
                                 placeholder="Enter project slug"
                                 disabled={processing}
                             />
-                            <InputError message={errors.slug?.[selectedLanguage as keyof typeof errors.slug] as string} />
+                            <InputError message={errors['slug.' + selectedLanguage as keyof typeof errors]} />
                         </div>
                     </div>
                 </div>
@@ -252,7 +251,7 @@ export default function ProjectForm({
                             disabled={processing}
                             rows={15}
                         />
-                        <InputError message={errors.description?.[selectedLanguage as keyof typeof errors.description] as string} />
+                        <InputError message={errors['description.' + selectedLanguage as keyof typeof errors]} />
                     </div>
                 </div>
             </div>

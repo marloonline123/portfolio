@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AboutSectionController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\HeroSectionController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SkillController;
+use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Portfolio');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
     return Inertia::render('About');
@@ -52,9 +53,22 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     })->name('dashboard');
 
     Route::name('dashboard.')->group(function () {
+        // Skill Routes
         Route::apiResource('skills', SkillController::class)->except('show');
+
+        // Category Routes
         Route::apiResource('categories', CategoryController::class)->except('show');
+
+        // Project Routes
         Route::resource('projects', ProjectController::class);
+
+        // Hero Section Routes
+        Route::get('hero-sections', [HeroSectionController::class, 'edit'])->name('hero-sections.edit');
+        Route::put('hero-sections/{heroSection}', [HeroSectionController::class, 'update'])->name('hero-sections.update');
+
+        // About Section Routes
+        Route::get('about-sections', [AboutSectionController::class, 'edit'])->name('about-sections.edit');
+        Route::put('about-sections/{aboutSection}', [AboutSectionController::class, 'update'])->name('about-sections.update');
     });
 });
 

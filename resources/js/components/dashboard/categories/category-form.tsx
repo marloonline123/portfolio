@@ -65,12 +65,12 @@ export default function CategoryForm({ category, action, method = 'post', onSucc
                     <div className="col-span-3">
                         <Input
                             id="category-name"
-                            value={data.name[selectedLanguage] || ''}
+                            value={data.name[selectedLanguage as keyof typeof data.name] || ''}
                             onChange={(e) => setData('name', { ...data.name, [selectedLanguage]: e.target.value })}
                             placeholder="Enter category name"
                             disabled={processing}
                         />
-                        <InputError message={errors.name?.[selectedLanguage as keyof typeof errors.name] as string} />
+                        <InputError message={errors['name.' + selectedLanguage as keyof typeof errors]} />
                     </div>
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
@@ -80,12 +80,12 @@ export default function CategoryForm({ category, action, method = 'post', onSucc
                     <div className="col-span-3">
                         <Input
                             id="category-slug"
-                            value={data.slug[selectedLanguage] || ''}
+                            value={data.slug[selectedLanguage as keyof typeof data.slug] || ''}
                             onChange={(e) => setData('slug', { ...data.slug, [selectedLanguage]: e.target.value })}
                             placeholder="Enter category slug"
                             disabled={processing}
                         />
-                        <InputError message={errors.slug?.[selectedLanguage as keyof typeof errors.slug] as string} />
+                        <InputError message={errors['slug.' + selectedLanguage as keyof typeof errors]} />
                     </div>
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
@@ -95,12 +95,12 @@ export default function CategoryForm({ category, action, method = 'post', onSucc
                     <div className="col-span-3">
                         <Input
                             id="category-description"
-                            value={data.description[selectedLanguage] || ''}
+                            value={data.description[selectedLanguage as keyof typeof data.description] || ''}
                             onChange={(e) => setData('description', { ...data.description, [selectedLanguage]: e.target.value })}
                             placeholder="Enter category description"
                             disabled={processing}
                         />
-                        <InputError message={errors.description?.[selectedLanguage as keyof typeof errors.description] as string} />
+                        <InputError message={errors['description.' + selectedLanguage as keyof typeof errors]} />
                     </div>
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
