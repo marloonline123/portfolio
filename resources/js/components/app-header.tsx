@@ -32,7 +32,7 @@ import LanguageToggle from '@/components/language-toggle';
 import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
-import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
+import { type BreadcrumbItem, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, Menu, Search, Star } from 'lucide-react';
 import AppLogo from './app-logo';
@@ -45,8 +45,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Skills',
-        href: route('dashboard.skills.index'),
+        title: 'Tools',
+        href: route('dashboard.tools.index'),
         icon: Star,
     },
 ];
@@ -72,7 +72,7 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
-    const page = usePage<SharedData>();
+    const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();
     return (

@@ -5,10 +5,10 @@ import { Label } from '@/components/ui/label';
 import InputError from '@/components/input-error';
 import FormButton from '@/components/shared/form-button';
 import LocalDropdown from '@/components/shared/local-dropdown';
-import { Skill } from '@/types/skill';
+import { Tool } from '@/types/tool';
 
-interface SkillFormProps {
-    skill?: Skill | null;
+interface ToolFormProps {
+    tool?: Tool | null;
     action: string;
     method?: 'post' | 'put' | 'patch';
     onSuccess?: () => void;
@@ -16,13 +16,13 @@ interface SkillFormProps {
     submitLoadingText?: string;
 }
 
-export default function SkillForm({ skill, action, method = 'post', onSuccess, submitText = 'Submit', submitLoadingText = 'Submitting...' }: SkillFormProps) {
+export default function ToolForm({ tool, action, method = 'post', onSuccess, submitText = 'Submit', submitLoadingText = 'Submitting...' }: ToolFormProps) {
     const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
 
     const { data, setData, post, processing, errors } = useForm({
         name: {
-            en: skill?.name.en || '',
-            ar: skill?.name.ar || '',
+            en: tool?.name.en || '',
+            ar: tool?.name.ar || '',
         },
         _method: method !== 'post' ? method : undefined,
     });
@@ -49,15 +49,15 @@ export default function SkillForm({ skill, action, method = 'post', onSuccess, s
             </div>
             <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="skill-name" className="text-right">
+                    <Label htmlFor="tool-name" className="text-right">
                         Name
                     </Label>
                     <div className="col-span-3">
                         <Input
-                            id="skill-name"
+                            id="tool-name"
                             value={data.name[selectedLanguage as keyof typeof data.name] || ''}
                             onChange={(e) => setData('name', { ...data.name, [selectedLanguage]: e.target.value })}
-                            placeholder="Enter skill name"
+                            placeholder="Enter tool name"
                             disabled={processing}
                         />
                         <InputError message={errors['name.' + selectedLanguage as keyof typeof errors]} />

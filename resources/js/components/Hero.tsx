@@ -1,19 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileCode, Github, Linkedin } from 'lucide-react';
-import { LanguageContext } from '../context/LanguageContext';
 import { Link, usePage } from '@inertiajs/react';
 import { portfolioData } from '../data/portfolio';
 import { useTrans } from '@/hooks/use-trans';
 import { type HeroSection } from '@/types/hero-section';
-import { type Skill } from '@/types/skill';
+import { type Tool } from '@/types/tool';
 
 interface HeroProps {
   heroSection?: HeroSection;
-  skills: Skill[];
+  tools: Tool[];
 }
 
-const Hero: React.FC<HeroProps> = ({ heroSection, skills = [] }) => {
+const Hero: React.FC<HeroProps> = ({ heroSection, tools = [] }) => {
   const language = usePage().props.locale;
   const trans = useTrans();
 
@@ -166,13 +165,13 @@ const Hero: React.FC<HeroProps> = ({ heroSection, skills = [] }) => {
                   className="flex flex-wrap justify-center gap-2 text-xs"
                   variants={techStackAnimation}
                 >
-                  {skills.map((skill, index) => (
+                  {tools.map((tool, index) => (
                     <motion.span 
                       key={index}
                       variants={techItemAnimation}
                       className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-default"
                     >
-                      {trans(skill.name)}
+                      {trans(tool.name)}
                     </motion.span>
                   ))}
                 </motion.div>

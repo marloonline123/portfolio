@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Skill;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 
-class SkillController extends Controller
+class ToolController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['skills'] = Skill::search(request('search'))
+        $data['tools'] = Tool::search(request('search'))
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();
 
-        return inertia('dashboard/skills/index', $data);
+        return inertia('dashboard/tools/index', $data);
     }
 
     /**
@@ -30,35 +30,35 @@ class SkillController extends Controller
             'name.*' => 'required|string|max:255',
         ]);
 
-        Skill::create($validator);
+        Tool::create($validator);
 
-        return to_route('dashboard.skills.index')
-            ->with('success', 'Skill created successfully.');
+        return to_route('dashboard.tools.index')
+            ->with('success', 'Tool created successfully.');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Skill $skill)
+    public function update(Request $request, Tool $tool)
     {
         $validator = $request->validate([
             'name.*' => 'required|string|max:255',
         ]);
 
-        $skill->update($validator);
+        $tool->update($validator);
 
-        return to_route('dashboard.skills.index')
-            ->with('success', 'Skill updated successfully.');
+        return to_route('dashboard.tools.index')
+            ->with('success', 'Tool updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Skill $skill)
+    public function destroy(Tool $tool)
     {
-        $skill->delete();
+        $tool->delete();
 
-        return to_route('dashboard.skills.index')
-            ->with('success', 'Skill deleted successfully.');
+        return to_route('dashboard.tools.index')
+            ->with('success', 'Tool deleted successfully.');
     }
 }

@@ -6,7 +6,7 @@ use App\Traits\HasSearchScope;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Skill extends Model
+class Tool extends Model
 {
     use HasSearchScope, HasTranslations;
 

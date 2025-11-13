@@ -10,28 +10,30 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import FormButton from '@/components/shared/form-button';
-import { Skill } from '@/types/skill';
+import { Tool } from '@/types/tool';
+import { useTrans } from '@/hooks/use-trans';
 
-interface DeleteSkillModalProps {
-    skill: Skill | null;
+interface DeleteToolModalProps {
+    tool: Tool | null;
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
 }
 
-export default function DeleteSkillModal({ skill, isOpen, onOpenChange }: DeleteSkillModalProps) {
-    if (!skill) return null;
+export default function DeleteToolModal({ tool, isOpen, onOpenChange }: DeleteToolModalProps) {
+    const trans = useTrans();
+    if (!tool) return null;
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Delete Skill</DialogTitle>
+                    <DialogTitle>Delete Tool</DialogTitle>
                     <DialogDescription>
-                        Are you sure you want to delete "{skill.name}"? This action cannot be undone.
+                        Are you sure you want to delete "{trans(tool.name)}"? This action cannot be undone.
                     </DialogDescription>
                 </DialogHeader>
-                <Form 
-                    action={route('dashboard.skills.destroy', skill.id)} 
+                <Form
+                    action={route('dashboard.tools.destroy', tool.id)}
                     method="delete"
                     onFinish={() => onOpenChange(false)}
                 >

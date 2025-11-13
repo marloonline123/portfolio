@@ -44,8 +44,8 @@ const mainNavItems: NavItem[] = [
         ],
     },
     {
-        title: 'Skills',
-        href: route('dashboard.skills.index'),
+        title: 'Tools',
+        href: route('dashboard.tools.index'),
         icon: Star,
     },
     {

@@ -6,31 +6,31 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import SkillForm from './skill-form';
-import { Skill } from '@/types/skill';
+import ToolForm from './tool-form';
+import { Tool } from '@/types/tool';
 
-interface EditSkillModalProps {
-    skill: Skill | null;
+interface EditToolModalProps {
+    tool: Tool | null;
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
 }
 
-export default function EditSkillModal({ skill, isOpen, onOpenChange }: EditSkillModalProps) {
-    if (!skill) return null;
+export default function EditToolModal({ tool, isOpen, onOpenChange }: EditToolModalProps) {
+    if (!tool) return null;
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent>
                 <>
                     <DialogHeader>
-                        <DialogTitle>Edit Skill</DialogTitle>
+                        <DialogTitle>Edit Tool</DialogTitle>
                         <DialogDescription>
-                            Update the skill information.
+                            Update the tool information.
                         </DialogDescription>
                     </DialogHeader>
-                    <SkillForm
-                        skill={skill}
-                        action={route('dashboard.skills.update', skill.id)}
+                    <ToolForm
+                        tool={tool}
+                        action={route('dashboard.tools.update', tool.id)}
                         method="put"
                         onSuccess={() => onOpenChange(false)}
                         submitText="Update"
