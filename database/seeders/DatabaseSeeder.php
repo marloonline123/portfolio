@@ -24,5 +24,13 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        $this->call([
+            CategorySeeder::class,
+            ToolSeeder::class,
+            ProjectSeeder::class,
+            FieldsSectionSeeder::class,
+            SkillSeeder::class,
+        ]);
     }
 }

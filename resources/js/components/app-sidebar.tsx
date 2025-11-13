@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap, Settings } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -47,6 +47,11 @@ const mainNavItems: NavItem[] = [
         title: 'Tools',
         href: route('dashboard.tools.index'),
         icon: Star,
+    },
+    {
+        title: 'Skills',
+        href: route('dashboard.skills.index'),
+        icon: Settings,
     },
     {
         title: 'Categories',

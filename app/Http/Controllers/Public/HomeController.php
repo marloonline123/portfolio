@@ -7,6 +7,7 @@ use App\Http\Resources\FieldsSectionResource;
 use App\Models\AboutSection;
 use App\Models\FieldsSection;
 use App\Models\HeroSection;
+use App\Models\Skill;
 use App\Models\Tool;
 use Inertia\Inertia;
 
@@ -18,12 +19,14 @@ class HomeController extends Controller
         $aboutSection = AboutSection::active()->first();
         $fieldsSections = FieldsSectionResource::collection(FieldsSection::active()->get());
         $tools = Tool::all();
+        $skills = Skill::all();
 
         return Inertia::render('public/home', [
             'heroSection' => $heroSection,
             'aboutSection' => $aboutSection,
             'fieldsSections' => $fieldsSections,
             'tools' => $tools,
+            'skills' => $skills,
         ]);
     }
 }

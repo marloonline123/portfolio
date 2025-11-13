@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\FieldsSectionController;
 use App\Http\Controllers\Dashboard\HeroSectionController;
 use App\Http\Controllers\Dashboard\ProjectController;
+use App\Http\Controllers\Dashboard\SkillController;
 use App\Http\Controllers\Dashboard\ToolController;
 use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::name('dashboard.')->group(function () {
         // Tool Routes
         Route::apiResource('tools', ToolController::class)->except('show');
+
+        // Skill Routes
+        Route::apiResource('skills', SkillController::class)->except('show');
 
         // Category Routes
         Route::apiResource('categories', CategoryController::class)->except('show');

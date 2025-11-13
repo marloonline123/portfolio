@@ -3,8 +3,11 @@ import { motion } from 'framer-motion';
 import { Code2, Layers, Settings, Database, Palette, ChevronRight } from 'lucide-react';
 import { useTrans } from '@/hooks/use-trans';
 import { portfolioData } from '../data/portfolio';
+import SkillCard from '@/components/public/skills/SkillCard';
 import { AboutSection } from '@/types/about-section';
 import { FieldsSection } from '@/types/fields-section';
+import { Skill } from '@/types/skill';
+import EmptyResource from './shared/EmptyResource';
 
 const getIconComponent = (iconName: string) => {
   switch (iconName) {
@@ -23,14 +26,14 @@ const getIconComponent = (iconName: string) => {
   }
 };
 
-interface SkillCardProps {
+interface FieldCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
 }
 
-const SkillCard: React.FC<SkillCardProps> = ({ icon, title, description }) => (
-  <motion.div 
+const FieldCard: React.FC<FieldCardProps> = ({ icon, title, description }) => (
+  <motion.div
     whileHover={{ y: -5 }}
     className="card p-6"
   >
@@ -45,9 +48,10 @@ const SkillCard: React.FC<SkillCardProps> = ({ icon, title, description }) => (
 interface AboutProps {
   aboutSection?: AboutSection;
   fieldsSections?: FieldsSection[];
+  skills?: Skill[];
 }
 
-const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections }: AboutProps) => {
+const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections, skills }: AboutProps) => {
   const trans = useTrans();
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-gray-900/50">
@@ -94,77 +98,17 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections }: AboutProp
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-dark-card rounded-xl p-6 shadow-sm">
-                    <h4 className="font-semibold mb-2">Frontend</h4>
-                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        HTML5, CSS3, JavaScript
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        React, Vue, Next.js
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        Tailwind CSS
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white dark:bg-dark-card rounded-xl p-6 shadow-sm">
-                    <h4 className="font-semibold mb-2">Backend</h4>
-                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        PHP, Laravel
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        MySQL
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        RESTful APIs
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white dark:bg-dark-card rounded-xl p-6 shadow-sm">
-                    <h4 className="font-semibold mb-2">Tools</h4>
-                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        Git, GitHub
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        VS Code
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        Docker
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white dark:bg-dark-card rounded-xl p-6 shadow-sm">
-                    <h4 className="font-semibold mb-2">Others</h4>
-                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        Inertia.js
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        Responsive Design
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                        API Integration
-                      </li>
-                    </ul>
-                  </div>
+              {skills && skills.length > 0 ? (
+                skills.map((skill) => (
+                  <SkillCard key={skill.id} skill={skill} />
+                ))
+              ) : (
+                <EmptyResource
+                  icon={Code2}
+                  title={'No Skills'}
+                  description={'There are no skills to display.'}
+                />
+              )}
             </div>
           </motion.div>
         </div>
@@ -175,7 +119,7 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections }: AboutProp
             fieldsSections.map((fieldSection) => {
               const IconComponent = getIconComponent(fieldSection.iconPath || 'Code2');
               return (
-                <SkillCard
+                <FieldCard
                   key={fieldSection.id}
                   icon={<IconComponent size={24} className="text-primary-600 dark:text-primary-400" />}
                   title={trans(fieldSection.name)}
@@ -183,19 +127,13 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections }: AboutProp
                 />
               );
             })
-          ) : (
-            portfolioData.about.whatIDo.items.map((item, index) => {
-              const IconComponent = getIconComponent(item.icon);
-              return (
-                <SkillCard
-                  key={index}
-                  icon={<IconComponent size={24} className="text-primary-600 dark:text-primary-400" />}
-                  title={trans(item.title)}
-                  description={trans(item.description)}
-                />
-              );
-            })
-          )}
+          ) : <EmptyResource
+            className="col-span-3"
+            icon={Code2}
+            title={'No Fields'}
+            description={'There are no fields to display.'}
+          />
+          }
         </div>
       </div>
     </section>
