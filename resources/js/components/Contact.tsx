@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { useTrans } from '@/hooks/use-trans';
+import { ContactData } from '@/types/contact-data';
 
 interface FormState {
   name: string;
@@ -8,7 +10,12 @@ interface FormState {
   message: string;
 }
 
-const Contact: React.FC = () => {
+interface ContactProps {
+  contactData?: ContactData;
+}
+
+const Contact: React.FC<ContactProps> = ({ contactData }) => {
+  const trans = useTrans();
   const [formState, setFormState] = useState<FormState>({
     name: '',
     email: '',
@@ -42,6 +49,9 @@ const Contact: React.FC = () => {
     }, 1500);
   };
 
+  console.log('contactData: ', contactData);
+  
+
   return (
     <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-900/50">
       <div className="container-custom">
@@ -52,9 +62,9 @@ const Contact: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="section-title">Get In Touch</h2>
+          <h2 className="section-title">{contactData?.title ? trans(contactData.title) : ''}</h2>
           <p className="section-subtitle mx-auto">
-            Have a project in mind or want to discuss potential opportunities? I'd love to hear from you!
+            {contactData?.subtitle ? trans(contactData.subtitle) : ''}
           </p>
         </motion.div>
 
@@ -68,8 +78,7 @@ const Contact: React.FC = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-8">
-              Feel free to reach out to me via email or phone. I'm always open to discussing new projects, 
-              creative ideas, or opportunities to be part of your vision.
+              {contactData?.description ? trans(contactData.description) : ''}
             </p>
 
             <div className="space-y-6">
@@ -79,8 +88,8 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-medium">Email</h4>
-                  <a href="mailto:abotalib@example.com" className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                    abotalib@example.com
+                  <a href={`mailto:${contactData?.email || ''}`} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                    {contactData?.email || ''}
                   </a>
                 </div>
               </div>
@@ -91,8 +100,8 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-medium">Phone</h4>
-                  <a href="tel:+1234567890" className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                    +1 (234) 567-890
+                  <a href={`tel:${contactData?.phone || ''}`} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                    {contactData?.phone || ''}
                   </a>
                 </div>
               </div>
@@ -104,7 +113,7 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="font-medium">Location</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Available for remote work worldwide
+                    {contactData?.location || ''}
                   </p>
                 </div>
               </div>

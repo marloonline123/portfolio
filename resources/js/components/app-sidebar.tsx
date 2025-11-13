@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap, Settings } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap, Settings, Mail } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -52,6 +52,11 @@ const mainNavItems: NavItem[] = [
         title: 'Skills',
         href: route('dashboard.skills.index'),
         icon: Settings,
+    },
+    {
+        title: 'Contact Page',
+        href: route('dashboard.contact-page.edit'),
+        icon: Mail,
     },
     {
         title: 'Categories',
@@ -98,7 +103,7 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
+                {/* <NavFooter items={footerNavItems} className="mt-auto" /> */}
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

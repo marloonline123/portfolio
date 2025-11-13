@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Dashboard\AboutSectionController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\ContactPageController;
 use App\Http\Controllers\Dashboard\FieldsSectionController;
 use App\Http\Controllers\Dashboard\HeroSectionController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SkillController;
 use App\Http\Controllers\Dashboard\ToolController;
+use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,9 +19,7 @@ Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
-Route::get('/contact', function () {
-    return Inertia::render('Contact');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/projects/{slug}', function ($slug) {
     // $project = \App\Models\Project::where('slug->' . app()->getLocale(), $slug)->first();
@@ -69,14 +69,18 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
 
         // Hero Section Routes
         Route::get('hero-sections', [HeroSectionController::class, 'edit'])->name('hero-sections.edit');
-        Route::put('hero-sections/{heroSection}', [HeroSectionController::class, 'update'])->name('hero-sections.update');
+        Route::put('hero-sections', [HeroSectionController::class, 'update'])->name('hero-sections.update');
 
         // About Section Routes
         Route::get('about-sections', [AboutSectionController::class, 'edit'])->name('about-sections.edit');
-        Route::put('about-sections/{aboutSection}', [AboutSectionController::class, 'update'])->name('about-sections.update');
+        Route::put('about-sections', [AboutSectionController::class, 'update'])->name('about-sections.update');
 
         // Fields Section Routes
         Route::apiResource('fields-sections', FieldsSectionController::class)->except('show');
+
+        // Contact Page Routes
+        Route::get('contact-page', [ContactPageController::class, 'edit'])->name('contact-page.edit');
+        Route::put('contact-page', [ContactPageController::class, 'update'])->name('contact-page.update');
     });
 });
 

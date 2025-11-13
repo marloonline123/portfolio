@@ -16,25 +16,7 @@ class HeroSectionController extends BaseController
      */
     public function edit()
     {
-        $heroSection = HeroSection::active()->first();
-
-        if (!$heroSection) {
-            $heroSection = HeroSection::create([
-                'name' => ['en' => 'Abotalib Adam', 'ar' => 'أبو طالب آدم'],
-                'role' => ['en' => 'Full Stack Developer', 'ar' => 'مطور ويب كامل الوظائف'],
-                'description' => [
-                    'en' => 'I am a passionate full-stack developer with 2 years of freelance experience creating modern, functional, and user-friendly applications.',
-                    'ar' => 'أنا مطور ويب كامل الوظائف شغوف بسنتين من الخبرة في العمل الحر في إنشاء تطبيقات حديثة ووظيفية وسهلة الاستخدام.'
-                ],
-                'years_experience' => 2,
-                'projects_count' => 10,
-                'github_url' => 'https://github.com',
-                'linkedin_url' => 'https://linkedin.com',
-                'is_active' => true,
-            ]);
-        }
-
-        $data['heroSection'] = new HeroSectionResource($heroSection);
+        $data['heroSection'] = HeroSection::active()->first();
 
         return inertia('dashboard/hero-sections/edit', $data);
     }
@@ -42,11 +24,17 @@ class HeroSectionController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(HeroSectionRequest $request, HeroSection $heroSection)
+    public function update(HeroSectionRequest $request)
     {
-        $heroSection->update($request->validated());
+        $heroSection = HeroSection::active()->first();
 
-        return to_route('dashboard.hero-sections.index')
+        if ($heroSection) {
+            $heroSection->update($request->validated());
+        } else {
+            HeroSection::create(array_merge($request->validated(), ['is_active' => true]));
+        }
+
+        return to_route('dashboard.hero-sections.edit')
             ->with('success', 'Hero section updated successfully.');
     }
 }

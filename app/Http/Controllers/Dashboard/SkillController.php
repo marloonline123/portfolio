@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\SkillRequest;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 
@@ -24,16 +25,11 @@ class SkillController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SkillRequest $request)
     {
-        $validator = $request->validate([
-            'name.*' => 'required|string|max:255',
-            'item_1.*' => 'required|string|max:255',
-            'item_2.*' => 'required|string|max:255',
-            'item_3.*' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
 
-        Skill::create($validator);
+        Skill::create($data);
 
         return to_route('dashboard.skills.index')
             ->with('success', 'Skill created successfully.');
@@ -42,16 +38,11 @@ class SkillController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Skill $skill)
+    public function update(SkillRequest $request, Skill $skill)
     {
-        $validator = $request->validate([
-            'name.*' => 'required|string|max:255',
-            'item_1.*' => 'required|string|max:255',
-            'item_2.*' => 'required|string|max:255',
-            'item_3.*' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
 
-        $skill->update($validator);
+        $skill->update($data);
 
         return to_route('dashboard.skills.index')
             ->with('success', 'Skill updated successfully.');

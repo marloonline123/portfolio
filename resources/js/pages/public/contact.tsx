@@ -1,10 +1,15 @@
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import { ContactData } from '@/types/contact-data';
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
-export default function ContactPage() {
+interface ContactPageProps {
+    contactData: ContactData
+    
+}
+export default function ContactPage({ contactData }: ContactPageProps) {
     const [scrollProgress, setScrollProgress] = useState(0);
 
     const handleScroll = () => {
@@ -31,7 +36,7 @@ export default function ContactPage() {
                 <Navbar />
 
                 <main className="flex-grow">
-                    <Contact />
+                    <Contact contactData={contactData} />
                 </main>
 
                 <Footer />
