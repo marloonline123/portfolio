@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap, Settings, Mail } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Star, ListTree, Briefcase, User, Home, Zap, Settings, Mail, MessageSquare } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -57,6 +57,11 @@ const mainNavItems: NavItem[] = [
         title: 'Contact Page',
         href: route('dashboard.contact-page.edit'),
         icon: Mail,
+    },
+    {
+        title: 'Messages',
+        href: route('dashboard.messages.index'),
+        icon: MessageSquare,
     },
     {
         title: 'Categories',

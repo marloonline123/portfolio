@@ -1,6 +1,10 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ReactNode, useEffect, useState } from 'react';
+import { usePage } from '@inertiajs/react';
+import { toast } from 'sonner';
+import { PageProps } from '@/types';
+import { Toaster } from '@/components/ui/sonner';
 
 interface PublicLayoutProps {
     children: ReactNode;
@@ -8,6 +12,21 @@ interface PublicLayoutProps {
 
 export default function PublicLayout({ children }: PublicLayoutProps) {
     const [scrollProgress, setScrollProgress] = useState(0);
+    const { flash } = usePage().props as PageProps;
+
+    useEffect(() => {
+        if (flash?.success) {
+            toast.success(flash.success);
+        }
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+        if (flash?.info) {
+            toast.info(flash.info);
+        }
+        console.log('flash messages: ', flash);
+        
+    }, [flash]);
 
     const handleScroll = () => {
         const totalScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -29,12 +48,13 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
             />
 
             <Navbar />
-
             <main className="flex-grow">
                 {children}
+            <h1>Hello</h1>
             </main>
 
             <Footer />
+            <Toaster />
         </div>
     );
 }

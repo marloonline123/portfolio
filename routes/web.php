@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ContactPageController;
 use App\Http\Controllers\Dashboard\FieldsSectionController;
 use App\Http\Controllers\Dashboard\HeroSectionController;
+use App\Http\Controllers\Dashboard\MessageController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SkillController;
 use App\Http\Controllers\Dashboard\ToolController;
@@ -20,6 +21,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/projects/{slug}', function ($slug) {
     // $project = \App\Models\Project::where('slug->' . app()->getLocale(), $slug)->first();
@@ -81,6 +83,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         // Contact Page Routes
         Route::get('contact-page', [ContactPageController::class, 'edit'])->name('contact-page.edit');
         Route::put('contact-page', [ContactPageController::class, 'update'])->name('contact-page.update');
+
+        // Message Routes
+        Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy']);
     });
 });
 
