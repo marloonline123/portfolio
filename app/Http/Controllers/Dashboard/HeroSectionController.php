@@ -16,7 +16,7 @@ class HeroSectionController extends BaseController
      */
     public function edit()
     {
-        $data['heroSection'] = HeroSection::active()->first();
+        $data['heroSection'] = HeroSection::active()->first()->toResource()->resolve();
 
         return inertia('dashboard/hero-sections/edit', $data);
     }

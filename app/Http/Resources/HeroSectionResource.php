@@ -16,9 +16,9 @@ class HeroSectionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'role' => $this->role,
-            'description' => $this->description,
+            'name' => $this->getTranslations('name'),
+            'role' => $this->getTranslations('role'),
+            'description' => $this->getTranslations('description'),
             'yearsExperience' => $this->years_experience,
             'projectsCount' => $this->projects_count,
             'githubUrl' => $this->github_url,

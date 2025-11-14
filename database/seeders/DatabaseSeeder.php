@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call([
+            HeroSectionSeeder::class,
             CategorySeeder::class,
             ToolSeeder::class,
             ProjectSeeder::class,

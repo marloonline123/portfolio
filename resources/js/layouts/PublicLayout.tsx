@@ -50,7 +50,6 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
             <Navbar />
             <main className="flex-grow">
                 {children}
-            <h1>Hello</h1>
             </main>
 
             <Footer />

@@ -32,6 +32,9 @@ export default function Edit({ heroSection }: Props) {
         put(route('dashboard.hero-sections.update', heroSection.id));
     };
 
+    console.log(heroSection);
+    
+
     return (
         <AppLayout>
             <Head title="Edit Hero Section" />

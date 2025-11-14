@@ -23,6 +23,22 @@ Route::get('/about', function () {
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+// Error pages for development/testing
+if (app()->environment(['local', 'testing'])) {
+    Route::get('/test-404', function () {
+        abort(404);
+    });
+    Route::get('/test-403', function () {
+        abort(403);
+    });
+    Route::get('/test-500', function () {
+        abort(500);
+    });
+    Route::get('/test-503', function () {
+        abort(503);
+    });
+}
+
 Route::get('/projects/{slug}', function ($slug) {
     // $project = \App\Models\Project::where('slug->' . app()->getLocale(), $slug)->first();
     $project = [
