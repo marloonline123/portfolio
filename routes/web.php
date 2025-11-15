@@ -9,39 +9,31 @@ use App\Http\Controllers\Dashboard\MessageController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SkillController;
 use App\Http\Controllers\Dashboard\ToolController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/test-session', function () {
+    session()->put('x', 'hello world');
+    session()->save();
+
+    return session()->get('x');
+});
+
+
+// Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->name('about');
-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-// Error pages for development/testing
-if (app()->environment(['local', 'testing'])) {
-    Route::get('/test-404', function () {
-        abort(404);
-    });
-    Route::get('/test-403', function () {
-        abort(403);
-    });
-    Route::get('/test-500', function () {
-        abort(500);
-    });
-    Route::get('/test-503', function () {
-        abort(503);
-    });
-}
-
 Route::get('/projects', [App\Http\Controllers\Public\ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{slug}', [App\Http\Controllers\Public\ProjectController::class, 'show'])->name('projects.show');
 
+// Language Toggle
+Route::post('/locale/{locale}', LocaleController::class)->name('set-locale');
+
+// Dashboard Routes
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
     Route::get('/', function () {
         return Inertia::render('dashboard/dashboard');
@@ -79,6 +71,22 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy']);
     });
 });
+
+// Error pages for development/testing
+if (app()->environment(['local', 'testing'])) {
+    Route::get('/test-404', function () {
+        abort(404);
+    });
+    Route::get('/test-403', function () {
+        abort(403);
+    });
+    Route::get('/test-500', function () {
+        abort(500);
+    });
+    Route::get('/test-503', function () {
+        abort(503);
+    });
+}
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

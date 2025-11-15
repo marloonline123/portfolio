@@ -1,9 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTrans } from '@/hooks/use-trans';
 import { ContactData } from '@/types/contact-data';
 import ContactForm from './public/contact/contact-form';
+import { t } from 'i18next';
 
 interface ContactProps {
   contactData?: ContactData;
@@ -11,7 +11,6 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ contactData }) => {
   const trans = useTrans();
-
   return (
     <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-900/50">
       <div className="container-custom">
@@ -36,7 +35,7 @@ const Contact: React.FC<ContactProps> = ({ contactData }) => {
             transition={{ duration: 0.5 }}
             className="md:col-span-2"
           >
-            <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+            <h3 className="text-2xl font-bold mb-6">{t('contact.contactInformation')}</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-8">
               {contactData?.description ? trans(contactData.description) : ''}
             </p>
@@ -47,7 +46,7 @@ const Contact: React.FC<ContactProps> = ({ contactData }) => {
                   <Mail size={20} />
                 </div>
                 <div>
-                  <h4 className="font-medium">Email</h4>
+                  <h4 className="font-medium">{t('contact.email')}</h4>
                   <a href={`mailto:${contactData?.email || ''}`} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                     {contactData?.email || ''}
                   </a>
@@ -59,7 +58,7 @@ const Contact: React.FC<ContactProps> = ({ contactData }) => {
                   <Phone size={20} />
                 </div>
                 <div>
-                  <h4 className="font-medium">Phone</h4>
+                  <h4 className="font-medium">{t('contact.phone')}</h4>
                   <a href={`tel:${contactData?.phone || ''}`} className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                     {contactData?.phone || ''}
                   </a>
@@ -71,7 +70,7 @@ const Contact: React.FC<ContactProps> = ({ contactData }) => {
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <h4 className="font-medium">Location</h4>
+                  <h4 className="font-medium">{t('contact.location')}</h4>
                   <p className="text-gray-600 dark:text-gray-300">
                     {contactData?.location || ''}
                   </p>
@@ -88,7 +87,7 @@ const Contact: React.FC<ContactProps> = ({ contactData }) => {
             className="md:col-span-3"
           >
             <div className="card p-8">
-              <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
+              <h3 className="text-2xl font-bold mb-6">{t('contact.sendMessage')}</h3>
               <ContactForm />
             </div>
           </motion.div>

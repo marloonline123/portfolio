@@ -1,6 +1,6 @@
 import React from 'react';
-import { PaginatedData } from '@/Types/global';
 import { router } from '@inertiajs/react';
+import { t } from 'i18next';
 
 type PageLink = {
     url: string | null;
@@ -8,15 +8,25 @@ type PageLink = {
     active: boolean;
 }
 
-type PaginationProps<T> = {
-    meta: PaginatedData<T>['meta'];
+type PaginationMeta = {
+    current_page: number;
+    from: number;
+    to: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+    links: { url: string | null; label: string; active: boolean; page?: number }[];
+};
+
+type PaginationProps = {
+    meta: PaginationMeta;
 };
 
 /**
  * Reusable pagination component that accepts the `meta` object from `PaginatedData<T>`.
  * It renders previous/next buttons and a compact list of page links.
  */
-export default function Pagination<T>({ meta }: PaginationProps<T>) {
+export default function Pagination({ meta }: PaginationProps) {
     if (!meta || (meta && meta.last_page === 1)) return null;
 
     const links: PageLink[] = meta.links || [];
@@ -24,11 +34,20 @@ export default function Pagination<T>({ meta }: PaginationProps<T>) {
     const renderLabel = (label: string) => {
         // Strip tags and handle common HTML entities used by Laravel pagination
         const stripped = label.replace(/<[^>]*>/g, '');
-        return stripped
-            .replace(/&laquo;|&lsaquo;/g, '«')
-            .replace(/&raquo;|&rsaquo;/g, '»')
+        let result = stripped
+            .replace(/&laquo;|&lsaquo;/g, '')
+            .replace(/&raquo;|&rsaquo;/g, '')
             .replace(/&hellip;/g, '...')
             .trim();
+
+        // Localize Previous and Next
+        if (result === 'Previous') {
+            result = t('pagination.previous');
+        } else if (result === 'Next') {
+            result = t('pagination.next');
+        }
+
+        return result;
     };
 
     const navigate = (url: string | null) => {
@@ -37,7 +56,7 @@ export default function Pagination<T>({ meta }: PaginationProps<T>) {
     };
 
     return (
-        <nav className="flex items-center justify-between bg-white p-3 rounded-md shadow-sm">
+        <nav className="flex items-center justify-between p-3 rounded-md shadow-sm">
             
 
             <ul className="flex items-center space-x-1 overflow-auto px-2">
@@ -50,7 +69,7 @@ export default function Pagination<T>({ meta }: PaginationProps<T>) {
                             <button
                                 onClick={() => { if (link.url) navigate(link.url); }}
                                 disabled={!link.url}
-                                className={`min-w-[36px] h-8 px-2 rounded-md text-sm flex items-center justify-center border ${link.active ? 'bg-primary text-white border-transparent' : 'bg-white hover:bg-gray-50'}`}
+                                className={`min-w-[36px] h-8 px-2 rounded-md text-sm flex items-center justify-center border ${link.active ? 'bg-primary-600 text-white border-transparent' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-300 dark:border-gray-600'}`}
                                 aria-current={link.active ? 'page' : undefined}
                             >
                                 {isNav ? label : (Number.isNaN(pageNumber) ? label : pageNumber)}
@@ -62,7 +81,7 @@ export default function Pagination<T>({ meta }: PaginationProps<T>) {
 
             <div className="flex items-center space-x-2">
                 <div className="text-sm text-muted-foreground">
-                    Page {meta.current_page} of {meta.last_page}
+                    {t('pagination.pageOf', { current: meta.current_page, last: meta.last_page })}
                 </div>
             </div>
         </nav>

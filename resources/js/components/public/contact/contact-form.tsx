@@ -6,14 +6,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import InputError from '@/components/input-error';
 import { SendIcon } from 'lucide-react';
-import { useTrans } from '@/hooks/use-trans';
+import { t } from 'i18next';
 
 interface ContactFormProps {
     onSuccess?: () => void;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
-    const trans = useTrans();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -43,13 +42,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                    <Label htmlFor="name">Name *</Label>
+                    <Label htmlFor="name">{t('contactForm.name')}</Label>
                     <Input
                         id="name"
                         type="text"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
-                        placeholder="Your full name"
+                        placeholder={t('contactForm.namePlaceholder')}
                         required
                         disabled={processing}
                     />
@@ -57,13 +56,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
                 </div>
 
                 <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email">{t('contactForm.email')}</Label>
                     <Input
                         id="email"
                         type="email"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
-                        placeholder="your.email@example.com"
+                        placeholder={t('contactForm.emailPlaceholder')}
                         required
                         disabled={processing}
                     />
@@ -72,13 +71,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="subject">Subject *</Label>
+                <Label htmlFor="subject">{t('contactForm.subject')}</Label>
                 <Input
                     id="subject"
                     type="text"
                     value={data.subject}
                     onChange={(e) => setData('subject', e.target.value)}
-                    placeholder="What's this about?"
+                    placeholder={t('contactForm.subjectPlaceholder')}
                     required
                     disabled={processing}
                 />
@@ -86,12 +85,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="content">Message *</Label>
+                <Label htmlFor="content">{t('contactForm.message')}</Label>
                 <Textarea
                     id="content"
                     value={data.content}
                     onChange={(e) => setData('content', e.target.value)}
-                    placeholder="Tell me about your project or inquiry..."
+                    placeholder={t('contactForm.messagePlaceholder')}
                     rows={6}
                     required
                     disabled={processing}
@@ -107,12 +106,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
                 {processing || isSubmitting ? (
                     <>
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Sending...
+                        {t('contactForm.sending')}
                     </>
                 ) : (
                     <>
                         <SendIcon className="h-4 w-4 mr-2" />
-                        Send Message
+                        {t('contactForm.sendMessage')}
                     </>
                 )}
             </Button>

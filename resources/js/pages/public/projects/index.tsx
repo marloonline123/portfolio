@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Search } from 'lucide-react';
 import { Link, router } from '@inertiajs/react';
 import { Head } from '@inertiajs/react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { useTrans } from '@/hooks/use-trans';
+import { LanguageContext } from '@/context/LanguageContext';
 import { Category } from '@/types/category';
 import { Project } from '@/types/project';
+import Pagination from '@/components/shared/pagination';
 
 interface PaginationLink {
     url: string | null;
@@ -43,6 +45,7 @@ interface ProjectsIndexProps {
 
 export default function ProjectsIndex({ projects, categories, filters }: ProjectsIndexProps) {
     const trans = useTrans();
+    const { t } = useContext(LanguageContext);
     const [search, setSearch] = useState(filters.search || '');
     const [selectedCategory, setSelectedCategory] = useState(filters.category || '');
 
@@ -80,9 +83,9 @@ export default function ProjectsIndex({ projects, categories, filters }: Project
                         transition={{ duration: 0.5 }}
                         className="text-center mb-16"
                     >
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">My Projects</h1>
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('projects.myProjects')}</h1>
                         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                            Explore my portfolio of projects showcasing different technologies and skills.
+                            {t('projects.explorePortfolio')}
                         </p>
                     </motion.div>
 
@@ -95,7 +98,7 @@ export default function ProjectsIndex({ projects, categories, filters }: Project
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder="Search projects..."
+                                    placeholder={t('projects.searchPlaceholder')}
                                     className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 />
                             </div>
@@ -103,7 +106,7 @@ export default function ProjectsIndex({ projects, categories, filters }: Project
                                 type="submit"
                                 className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
                             >
-                                Search
+                                {t('projects.search')}
                             </button>
                         </form>
 
@@ -117,7 +120,7 @@ export default function ProjectsIndex({ projects, categories, filters }: Project
                                         : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                                 }`}
                             >
-                                All Categories
+                                {t('projects.allCategories')}
                             </button>
                             {categories.map((category) => (
                                 <button
@@ -209,7 +212,7 @@ export default function ProjectsIndex({ projects, categories, filters }: Project
                                         href={`/projects/${trans(project.slug)}`}
                                         className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
                                     >
-                                        View Details →
+                                        {t('projects.viewDetails')}
                                     </Link>
                                 </div>
                             </motion.div>
@@ -217,38 +220,12 @@ export default function ProjectsIndex({ projects, categories, filters }: Project
                     </div>
 
                     {/* Pagination */}
-                    {projects.meta.last_page > 1 && (
-                        <div className="flex justify-center">
-                            <div className="flex space-x-2">
-                                {projects.meta.links.map((link: PaginationLink, index: number) => (
-                                    link.url ? (
-                                        <Link
-                                            key={index}
-                                            href={link.url}
-                                            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                                                link.active
-                                                    ? 'bg-primary-600 text-white'
-                                                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                                            }`}
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
-                                            preserveScroll
-                                        />
-                                    ) : (
-                                        <span
-                                            key={index}
-                                            className="px-3 py-2 rounded-md text-sm font-medium bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-600 cursor-not-allowed"
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
-                                        />
-                                    )
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                    <Pagination meta={projects.meta} />
 
                     {projects.data.length === 0 && (
                         <div className="text-center py-12">
                             <p className="text-gray-600 dark:text-gray-300 text-lg">
-                                No projects found matching your criteria.
+                                {t('projects.noProjectsFound')}
                             </p>
                         </div>
                     )}

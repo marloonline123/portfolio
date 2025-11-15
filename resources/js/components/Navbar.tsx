@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
       <nav className="container-custom flex justify-between items-center py-4">
         <Link href="/" className="flex items-center gap-2 text-primary-600 dark:text-primary-400">
           <Code size={28} strokeWidth={2} />
-          <span className="font-bold text-xl">Abotalib</span>
+          <span className="font-bold text-xl">Larafolio</span>
         </Link>
 
         {/* Desktop menu */}

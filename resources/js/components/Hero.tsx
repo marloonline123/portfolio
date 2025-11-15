@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileCode, Github, Linkedin } from 'lucide-react';
-import { Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { portfolioData } from '../data/portfolio';
 import { useTrans } from '@/hooks/use-trans';
 import { type HeroSection } from '@/types/hero-section';
 import { type Tool } from '@/types/tool';
+import { LanguageContext } from '@/context/LanguageContext';
 
 interface HeroProps {
   heroSection?: HeroSection;
@@ -13,7 +14,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ heroSection, tools = [] }) => {
-  const language = usePage().props.locale;
+  const { language, t } = useContext(LanguageContext);
   const trans = useTrans();
 
   const techStackAnimation = {
@@ -160,7 +161,7 @@ const Hero: React.FC<HeroProps> = ({ heroSection, tools = [] }) => {
                 animate="show"
                 variants={techStackAnimation}
               >
-                <h3 className="font-bold text-xl mb-2">Tech Stack</h3>
+                <h3 className="font-bold text-xl mb-2">{t('hero.techStack')}</h3>
                 <motion.div 
                   className="flex flex-wrap justify-center gap-2 text-xs"
                   variants={techStackAnimation}
@@ -189,7 +190,7 @@ const Hero: React.FC<HeroProps> = ({ heroSection, tools = [] }) => {
                     >
                       {heroSection?.yearsExperience || 2}+
                     </motion.div>
-                    <div className="text-gray-600 dark:text-gray-300">Years Experience</div>
+                    <div className="text-gray-600 dark:text-gray-300">{t('hero.yearsExperience')}</div>
                   </div>
                   <div className="text-center">
                     <motion.div
@@ -200,7 +201,7 @@ const Hero: React.FC<HeroProps> = ({ heroSection, tools = [] }) => {
                     >
                       {heroSection?.projectsCount || 10}+
                     </motion.div>
-                    <div className="text-gray-600 dark:text-gray-300">Projects</div>
+                    <div className="text-gray-600 dark:text-gray-300">{t('hero.projects')}</div>
                   </div>
                 </motion.div>
               </motion.div>

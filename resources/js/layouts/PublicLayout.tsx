@@ -12,7 +12,7 @@ interface PublicLayoutProps {
 
 export default function PublicLayout({ children }: PublicLayoutProps) {
     const [scrollProgress, setScrollProgress] = useState(0);
-    const { flash } = usePage().props as PageProps;
+    const { flash, locale } = usePage().props as PageProps;
 
     useEffect(() => {
         if (flash?.success) {
@@ -37,8 +37,11 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
+        
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+    
+    console.log('cuurent Local is: ', locale);
 
     return (
         <div className="min-h-screen flex flex-col">

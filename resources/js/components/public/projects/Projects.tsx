@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import { useTrans } from '@/hooks/use-trans';
+import { LanguageContext } from '@/context/LanguageContext';
 import { Category } from '@/types/category';
 import { Project } from '@/types/project';
 
@@ -12,6 +13,7 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ projects, categories }) => {
   const trans = useTrans();
+  const { t } = useContext(LanguageContext);
   const [category, setCategory] = useState<string>('all');
 
   const getRandomProjects = (projects: Project[]) => {
@@ -33,16 +35,16 @@ const Projects: React.FC<ProjectsProps> = ({ projects, categories }) => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="section-title">My Projects</h2>
+          <h2 className="section-title">{t('projects.title')}</h2>
           <p className="section-subtitle mx-auto">
-            Here are some of the projects I've worked on. Each project showcases different skills and technologies.
+            {t('projects.subtitle')}
           </p>
           <div className="mt-6">
             <a
               href="/projects"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
             >
-              View All Projects
+              {t('projects.viewAllProjects')}
             </a>
           </div>
         </motion.div>
@@ -57,7 +59,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, categories }) => {
                   : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
             >
-              All
+              {t('projects.all')}
             </button>
             {categories.map((cat) => (
               <button

@@ -5,7 +5,7 @@ import { Config as ZiggyConfig } from 'ziggy-js';
 export interface PageProps {
     auth: Auth;
     ziggy: ZiggyConfig;
-    locale: string;
+    locale: "ar" | "en";
     flash?: {
         success?: string;
         error?: string;

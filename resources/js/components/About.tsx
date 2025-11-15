@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Layers, Settings, Database, Palette, ChevronRight } from 'lucide-react';
 import { useTrans } from '@/hooks/use-trans';
@@ -8,6 +8,7 @@ import { AboutSection } from '@/types/about-section';
 import { FieldsSection } from '@/types/fields-section';
 import { Skill } from '@/types/skill';
 import EmptyResource from './shared/EmptyResource';
+import { LanguageContext } from '@/context/LanguageContext';
 
 const getIconComponent = (iconName: string) => {
   switch (iconName) {
@@ -53,6 +54,7 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections, skills }: AboutProps) => {
   const trans = useTrans();
+  const { t } = useContext(LanguageContext);
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-gray-900/50">
       <div className="container-custom">
@@ -76,7 +78,7 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections, skills }: A
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-2xl font-bold mb-4">My Journey</h3>
+            <h3 className="text-2xl font-bold mb-4">{t('about.myJourney')}</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               {aboutSection?.journeyDescription ? trans(aboutSection.journeyDescription) : trans(portfolioData.about.journey)}
             </p>
@@ -86,7 +88,7 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections, skills }: A
             </p>
 
             <a href="#projects" className="flex items-center text-primary-600 dark:text-primary-400 font-medium">
-              View my work
+              {t('about.viewMyWork')}
               <ChevronRight size={18} />
             </a>
           </motion.div>
@@ -105,8 +107,8 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections, skills }: A
               ) : (
                 <EmptyResource
                   icon={Code2}
-                  title={'No Skills'}
-                  description={'There are no skills to display.'}
+                  title={t('about.noSkills')}
+                  description={t('about.noSkillsDescription')}
                 />
               )}
             </div>
@@ -130,8 +132,8 @@ const About: React.FC<AboutProps> = ({ aboutSection, fieldsSections, skills }: A
           ) : <EmptyResource
             className="col-span-3"
             icon={Code2}
-            title={'No Fields'}
-            description={'There are no fields to display.'}
+            title={t('about.noFields')}
+            description={t('about.noFieldsDescription')}
           />
           }
         </div>
