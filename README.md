@@ -168,9 +168,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Abotalib Adam**
 - Full Stack Developer
-- Portfolio: [Your Portfolio URL]
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
+- Email: abotalibx752@gmail.com
 
 ---
 
