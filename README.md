@@ -1,8 +1,7 @@
 # Larafolio
 
-| |
-|:--:|
-| ![Larafolio](https://i.ibb.co/gb1tvvFj/Larafolio.png) |
+![Larafolio](https://i.ibb.co/gb1tvvFj/Larafolio.png)
+
 
 
 A modern, responsive portfolio website built with Laravel and React, featuring a comprehensive dashboard for content management. This application showcases projects, skills, and provides an easy way to manage portfolio content through an intuitive admin interface.
