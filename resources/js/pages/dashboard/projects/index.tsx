@@ -82,7 +82,7 @@ export default function Index({ projects, search = '' }: Props) {
                                         <TableRow key={project.id}>
                                             <TableCell>{1 + index}</TableCell>
                                             <TableCell className="font-medium">{trans(project.title)}</TableCell>
-                                            <TableCell>{trans(project.category.name)}</TableCell>
+                                            <TableCell>{trans(project.category?.name)}</TableCell>
                                             <TableCell>
                                                 <div className="flex items-center gap-1 sm:gap-2">
                                                     <Button

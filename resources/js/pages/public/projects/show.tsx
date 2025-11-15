@@ -7,6 +7,7 @@ import PublicLayout from '@/layouts/PublicLayout';
 import { useTrans } from '@/hooks/use-trans';
 import { useTranslation } from 'react-i18next';
 import { Project } from '@/types/project';
+import { Image } from '@radix-ui/react-avatar';
 
 export default function ProjectDetailsPage({ project }: { project: Project }) {
     const trans = useTrans();
@@ -49,7 +50,7 @@ export default function ProjectDetailsPage({ project }: { project: Project }) {
                             className="aspect-video w-full overflow-hidden rounded-lg mb-8"
                         >
                             <img
-                                src={project.imageUrl}
+                                src={project.imagePath}
                                 alt={trans(project.title)}
                                 className="w-full h-full object-cover object-top"
                             />

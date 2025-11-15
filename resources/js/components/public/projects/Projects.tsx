@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
-import { projects } from '../../../data/projects';
 import { useTrans } from '@/hooks/use-trans';
 import { Category } from '@/types/category';
+import { Project } from '@/types/project';
 
-const Projects: React.FC = () => {
+interface ProjectsProps {
+  projects: Project[];
+  categories: Category[];
+}
+
+const Projects: React.FC<ProjectsProps> = ({ projects, categories }) => {
   const trans = useTrans();
-  const [category, setCategory] = useState<Category | 'all'>('all');
-  
-  const filteredProjects = category === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === category);
+  const [category, setCategory] = useState<string>('all');
+
+  const getRandomProjects = (projects: Project[]) => {
+    const randomProjects = projects.sort(() => 0.5 - Math.random()).slice(0, 6);
+    return randomProjects;
+  };
+
+  const filteredProjects = category === 'all'
+    ? getRandomProjects(projects)
+    : projects.filter(project => project.category.id.toString() === category);
 
   return (
     <section id="projects" className="section-padding">
@@ -27,21 +37,38 @@ const Projects: React.FC = () => {
           <p className="section-subtitle mx-auto">
             Here are some of the projects I've worked on. Each project showcases different skills and technologies.
           </p>
+          <div className="mt-6">
+            <a
+              href="/projects"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
+            >
+              View All Projects
+            </a>
+          </div>
         </motion.div>
 
         <div className="flex justify-center mb-10">
           <div className="inline-flex flex-wrap justify-center gap-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            {['all', 'web', 'mobile', 'system'].map((cat) => (
+            <button
+              key="all"
+              onClick={() => setCategory('all')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${category === 'all'
+                  ? 'bg-white dark:bg-dark-card shadow-sm text-primary-600 dark:text-primary-400'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+            >
+              All
+            </button>
+            {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setCategory(cat as Category | 'all')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                  category === cat
+                key={cat.id}
+                onClick={() => setCategory(cat.id.toString())}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${category === cat.id.toString()
                     ? 'bg-white dark:bg-dark-card shadow-sm text-primary-600 dark:text-primary-400'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                }`}
+                  }`}
               >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {trans(cat.name)}
               </button>
             ))}
           </div>
@@ -60,17 +87,17 @@ const Projects: React.FC = () => {
             >
               {/* Project image */}
               <div className="aspect-video w-full overflow-hidden relative">
-                <img 
-                  src={project.imagePath} 
-                  alt={trans(project.title)} 
+                <img
+                  src={project.imagePath}
+                  alt={trans(project.title)}
                   className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4 flex space-x-3">
                     {project.liveUrl && (
-                      <a 
-                        href={project.liveUrl} 
-                        target="_blank" 
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-white bg-primary-600 hover:bg-primary-700 p-2 rounded-full"
                       >
@@ -78,9 +105,9 @@ const Projects: React.FC = () => {
                       </a>
                     )}
                     {project.githubUrl && (
-                      <a 
-                        href={project.githubUrl} 
-                        target="_blank" 
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-white bg-gray-800 hover:bg-gray-900 p-2 rounded-full"
                       >
@@ -90,7 +117,7 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Project details */}
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
@@ -104,8 +131,8 @@ const Projects: React.FC = () => {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (
-                    <span 
-                      key={i} 
+                    <span
+                      key={i}
                       className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-full"
                     >
                       {tech}

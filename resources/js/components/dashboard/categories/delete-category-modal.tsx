@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import FormButton from '@/components/shared/form-button';
 import { Category } from '@/types/category';
+import { useTrans } from '@/hooks/use-trans';
 
 interface DeleteCategoryModalProps {
     category: Category | null;
@@ -19,6 +20,7 @@ interface DeleteCategoryModalProps {
 }
 
 export default function DeleteCategoryModal({ category, isOpen, onOpenChange }: DeleteCategoryModalProps) {
+    const trans = useTrans();
     if (!category) return null;
 
     return (
@@ -27,7 +29,7 @@ export default function DeleteCategoryModal({ category, isOpen, onOpenChange }: 
                 <DialogHeader>
                     <DialogTitle>Delete Category</DialogTitle>
                     <DialogDescription>
-                        Are you sure you want to delete "{category.name}"? This action cannot be undone.
+                        Are you sure you want to delete "{trans(category.name)}"? This action cannot be undone.
                     </DialogDescription>
                 </DialogHeader>
                 <Form 
@@ -46,7 +48,7 @@ export default function DeleteCategoryModal({ category, isOpen, onOpenChange }: 
                                 text="Delete"
                                 loadingText="Deleting..."
                                 isLoading={processing}
-                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                className="bg-destructive text-white hover:bg-destructive/90"
                             />
                         </DialogFooter>
                     )}

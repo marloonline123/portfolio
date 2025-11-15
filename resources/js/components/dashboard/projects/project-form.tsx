@@ -65,6 +65,7 @@ export default function ProjectForm({
             onSuccess: () => {
                 if (onSuccess) onSuccess();
             },
+            preserveScroll: true,
         });
     };
 
@@ -236,6 +237,7 @@ export default function ProjectForm({
                         accept="image/*"
                         description="Upload a project image (PNG, JPG, JPEG - Max 5MB)"
                     />
+                    <InputError message={errors.image} />
                 </div>
 
                 <div className="space-y-2">
