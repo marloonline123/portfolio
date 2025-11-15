@@ -1,5 +1,5 @@
 
-![Larafolio](https://i.ibb.co/gb1tvvFj/Larafolio.png)
+![Larafolio](https://i.ibb.co/Rkz2ZZPp/Larafolio.png)
 
 
 # Larafolio
